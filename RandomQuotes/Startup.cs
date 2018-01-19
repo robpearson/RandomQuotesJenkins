@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -47,9 +48,9 @@ namespace RandomQuotes
             });
 
             var quoteFilePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\data\quotes.txt");
-            Quote.Quotes = File.Exists(quoteFilePath) ? File.ReadAllLines(quoteFilePath) : new List<string>().ToArray();
+            Quote.Quotes = File.Exists(quoteFilePath) ? File.ReadAllLines(quoteFilePath).Select(System.Net.WebUtility.HtmlDecode).ToList() : new List<string>();
             var authorFilePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\data\authors.txt");
-            Quote.Authors = File.Exists(authorFilePath) ? File.ReadAllLines(authorFilePath) : new List<string>().ToArray();
+            Quote.Authors = File.Exists(authorFilePath) ? File.ReadAllLines(authorFilePath).Select(System.Net.WebUtility.HtmlDecode).ToList() : new List<string>();
         }
     }
 }
