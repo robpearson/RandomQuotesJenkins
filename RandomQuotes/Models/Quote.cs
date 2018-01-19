@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace RandomQuotes.Models
 {
@@ -18,8 +19,15 @@ namespace RandomQuotes.Models
         {
             var random = new Random();
             var index = random.Next(Quotes.Length);
-            var randomQuote = Quotes[index];
-            var randomAuthor = Authors[index];
+
+            var randomQuote = Quotes.ElementAtOrDefault(index);
+            var randomAuthor = Authors.ElementAtOrDefault(index);
+
+            if (string.IsNullOrEmpty(randomQuote) | string.IsNullOrEmpty(randomAuthor))
+            {
+                return BuildQuote("Something went wrong", "System");
+            }
+
             return BuildQuote(randomQuote, randomAuthor);
         }
 
