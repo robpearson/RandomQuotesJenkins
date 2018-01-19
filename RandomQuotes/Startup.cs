@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RandomQuotes.Models;
 
 namespace RandomQuotes
 {
@@ -22,6 +21,7 @@ namespace RandomQuotes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +45,11 @@ namespace RandomQuotes
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var quoteFilePath = Path.Combine(env.ContentRootPath, @"Data\quotes.txt");
+            Quote.Quotes = File.Exists(quoteFilePath) ? File.ReadAllLines(quoteFilePath) : new List<string>().ToArray();
+            var authorFilePath = Path.Combine(env.ContentRootPath, @"Data\authors.txt");
+            Quote.Authors = File.Exists(authorFilePath) ? File.ReadAllLines(authorFilePath) : new List<string>().ToArray();
         }
     }
 }

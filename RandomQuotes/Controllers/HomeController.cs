@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RandomQuotes.Models;
 
@@ -12,21 +8,14 @@ namespace RandomQuotes.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var quote = Quote.GetRandomQuote();
+            return View(quote);
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult ReloadPage()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Error()
