@@ -15,13 +15,19 @@ pipeline {
 
     stage('Package') {
         steps {
-            sh "/home/parallels/.dotnet/tools/dotnet-octo pack --id RandomQuotes --version 1.0.${env.BUILD_NUMBER} --format=Zip --basePath RandomQuotes/published-app"
+            sh "/home/parallels/.dotnet/tools/dotnet-octo pack --id RandomQuotes --version 1.6.${env.BUILD_NUMBER} --format=Zip --basePath RandomQuotes/published-app"
         }
     }
     
      stage ('Push to Octopus') {
         steps {
-            sh "/home/parallels/.dotnet/tools/dotnet-octo push --package=RandomQuotes.1.0.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
+            sh "/home/parallels/.dotnet/tools/dotnet-octo push --package=RandomQuotes.1.6.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
+        }
+     }
+
+     stage ('Create release') {
+        steps {
+            sh "/home/parallels/.dotnet/tools/dotnet-octo create-release --project=RandomQuotes -defaultpackageversion --version=1.6.${env.BUILD_NUMBER} --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
         }
      }
     
