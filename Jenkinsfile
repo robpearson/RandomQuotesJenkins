@@ -14,10 +14,10 @@ pipeline {
     }
 
     stage('Package') {
-        sh 'dotnet-octo pack --id RandomQuotes --version ${currentBuild.number} --basePath /published-app'
+        steps {
+            sh 'dotnet-octo pack --id RandomQuotes --version ${currentBuild.number} --basePath /published-app'
+        }
     }
     
-   
-
   }
 }
