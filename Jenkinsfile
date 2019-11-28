@@ -10,13 +10,9 @@ pipeline {
     stage('Run Tests') {
       steps {
         sh 'dotnet test RandomQuotes.sln --logger "trx;LogFileName=TestResults.trx"'
+        step ([$class: 'MSTestPublisher', testResultsFile:"**/TestResults/TestResults.trx", failOnError: true, keepLongStdio: true])
       }
     }
-    
-    post {
-        always {
-          step ([$class: 'MSTestPublisher', testResultsFile:"**/TestResults/TestResults.trx", failOnError: true, keepLongStdio: true])
-        }
-      }
+
   }
 }
