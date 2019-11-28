@@ -21,7 +21,7 @@ pipeline {
     
      stage ('Push to Octopus') {
         steps {
-            sh "/home/parallels/.dotnet/tools/dotnet-octo push --package=RandomQuotes.1.0.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://cloud.tentaclearmy.com:8065/ --apiKey=API-QX0S43BQUWN0AJPHZV3GUGE9LS"  
+            sh "/home/parallels/.dotnet/tools/dotnet-octo push --package=RandomQuotes.1.0.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-QX0S43BQUWN0AJPHZV3GUGE9LS"  
         }
      }
     
