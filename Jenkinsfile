@@ -27,7 +27,7 @@ pipeline {
 
      stage ('Create release') {
         steps {
-            sh "/home/parallels/.dotnet/tools/dotnet-octo create-release --project=RandomQuotes -defaultpackageversion --version=1.6.${env.BUILD_NUMBER} --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
+            sh "/home/parallels/.dotnet/tools/dotnet-octo create-release --project=Random Quotes -defaultpackageversion --version=1.6.${env.BUILD_NUMBER} --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
         }
      }
     
