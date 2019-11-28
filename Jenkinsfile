@@ -15,7 +15,7 @@ pipeline {
 
     stage('Package') {
         steps {
-            sh "dotnet-octo pack --id RandomQuotes --version 1.0.${env.BUILD_NUMBER} --basePath RandomQuotes/published-app"
+            sh "/home/parallels/.dotnet/tools/dotnet-octo pack --id RandomQuotes --version 1.0.${env.BUILD_NUMBER} --basePath RandomQuotes/published-app"
         }
     }
     
