@@ -10,9 +10,14 @@ pipeline {
     stage('Run Tests') {
       steps {
         sh 'dotnet test RandomQuotes.sln --logger "trx;LogFileName=TestResults.trx"'
-        step ([$class: 'MSTestPublisher', testResultsFile:"**/TestResults/TestResults.trx", failOnError: true, keepLongStdio: true])
       }
     }
+
+    stage('Package') {
+        sh 'dotnet-octo pack --id RandomQuotes --version ${currentBuild.number} --basePath /published-app'
+    }
+    
+   
 
   }
 }
