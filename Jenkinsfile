@@ -15,19 +15,19 @@ pipeline {
 
     stage('Package') {
         steps {
-            sh "/opt/Octo pack --id RandomQuotes --version 1.6.${env.BUILD_NUMBER} --format=Zip --basePath RandomQuotes/published-app"
+            sh "/opt/Octo/Octo pack --id RandomQuotes --version 1.6.${env.BUILD_NUMBER} --format=Zip --basePath RandomQuotes/published-app"
         }
     }
     
      stage ('Push to Octopus') {
         steps {
-            sh "/opt/Octo push --package=RandomQuotes.1.6.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
+            sh "/opt/Octo/Octo push --package=RandomQuotes.1.6.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
         }
      }
 
      stage ('Create release') {
         steps {
-            sh "/opt/Octo create-release --project='Random Quotes' --releaseNumber 1.6.${env.BUILD_NUMBER} --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
+            sh "/opt/Octo/Octo create-release --project='Random Quotes' --releaseNumber 1.6.${env.BUILD_NUMBER} --server=https://cloud.tentaclearmy.com:8085/ --apiKey=API-AAU863DZOLRUCPQBUFYXRLTF3IQ"  
         }
      }
     
