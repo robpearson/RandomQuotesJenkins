@@ -21,13 +21,13 @@ pipeline {
     
      stage ('Push to Octopus') {
         steps {
-            sh "/opt/Octo/Octo push --package=RandomQuotes.1.6.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://demo.octopus.app/ --apiKey=API-LK0QPLVD6ZIHJ3NPEJQRMBBDYM"  
+            sh "/opt/Octo/Octo push --package=RandomQuotes.1.6.${env.BUILD_NUMBER}.zip  --replace-existing --server=https://demo.octopus.app/ --space=RobP --apiKey=API-LK0QPLVD6ZIHJ3NPEJQRMBBDYM"  
         }
      }
 
      stage ('Create release') {
         steps {
-            sh "/opt/Octo/Octo create-release --project='Random Quotes' --releaseNumber 1.6.${env.BUILD_NUMBER} --server=https://demo.octopus.app/ --apiKey=API-LK0QPLVD6ZIHJ3NPEJQRMBBDYM"  
+            sh "/opt/Octo/Octo create-release --project='Random Quotes' --releaseNumber 1.6.${env.BUILD_NUMBER} --server=https://demo.octopus.app/ --space=RobP --apiKey=API-LK0QPLVD6ZIHJ3NPEJQRMBBDYM"  
         }
      }
     
